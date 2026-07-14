@@ -9,12 +9,16 @@
 </head>
 
 <body>
-    <h2>Update CSS Variables with <span class="hl">JS</span></h2>
+    <h2 style="--base: #BADA55;"></h2>
+    Update CSS Variables with
+    <span class="hl">JS</span>
+    </h2>
 
     <div class="controls">
         <label for="spacing">Spacing:</label>
         <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
-        <!-- id="spacing" -->
+        <!-- id="spacing" data-name="aj"
+            data-cool="FOR SUREEEEe" -->
 
         <label for="blur">Blur:</label>
         <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
@@ -61,6 +65,11 @@
             margin-bottom: 50px;
         }
 
+        a {
+            color: var(--base);
+            text-decoration: none;
+        }
+
         input {
             width: 100px;
         }
@@ -70,7 +79,8 @@
         const inputs = document.querySelectorAll(".controls input")
 
         function handleUpdate() {
-            console.log(this.value);
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
         }
 
         inputs.forEach(input => input.addEventListener('change', handleUpdate))
